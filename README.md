@@ -39,9 +39,13 @@ git clone https://github.com/CoreyHuang/ALPHAcamp-restaurant.git
 ```
 npm install
 ```
-#### 3. 執行(須進去資料夾)
+#### 3. 開啟本地伺服(須進去資料夾)
 ```
 nodemon app.js or npm run dev
+```
+#### 4. 執行
+```
+URL: http://localhost:3000/
 ```
 
 
