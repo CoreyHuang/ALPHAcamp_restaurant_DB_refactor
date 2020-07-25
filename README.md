@@ -3,7 +3,7 @@
 ### 此網站是由node.js與express共同打造的，並加入資料庫的CRUD操作。
 
 ---
-
+![image](https://github.com/CoreyHuang/ALPHAcamp_restaurant-DB-/blob/master/restaurantDB.png)
 ## Features(功能描述):
 #### 使用者可以瀏覽全部餐廳。
 #### 使用者可以搜尋喜愛的餐廳名稱與餐廳類別。
