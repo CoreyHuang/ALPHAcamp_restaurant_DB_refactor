@@ -1,0 +1,75 @@
+<form class="p-5 row mx-0" action="/restaurants" method="POST">
+  <h4 class="offset-sm-3 col-sm-10 pb-4">Add new restaurant</h4>
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Name<span style="color: red;">*</span></label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳名稱... (必填)" name="name">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Name(En)</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳英文名稱..." name="name_en">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Category<span style="color: red;">*</span></label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳類別... (必填)" name="category">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Image</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳圖片網址..." name="image">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Location</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳位址..." name="location">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Phone</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="餐廳電話..." name="phone">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Google_map</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="Google定位..." name="google_map">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Rating</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="評價..." name="rating">
+    </div>
+  </div>
+
+  <div class="form-group row col-sm-12">
+    <label for="colFormLabel" class="offset-sm-4 col-sm-1 col-form-label">Description<span style="color: red;">*</span></label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="colFormLabel" placeholder="相關描敘... (必填)" name="description">
+    </div>
+  </div>
+  {{#if alert}}
+    <div class="alert alert-danger row mx-5 justify-content-center w-100" role="alert">
+      請確認是否仍有參數未填寫~
+  </div>
+  {{/if}}
+  <div class="row mx-5 justify-content-end w-75">
+    <a href="/"><button type="button" class="btn btn-primary mb-2 mr-3">Back</button></a>
+    <button type="submit" class="btn btn-primary mb-2 ">Submit</button>
+  </div>
+
+</form>

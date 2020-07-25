@@ -8,7 +8,7 @@
           <i class="fas fa-utensils pr-2"></i>
           類別：
         </span>
-        {{restaurant.category}}
+        {{restaurant.category}} 
       </p>
 
       <p class="mb-1">
@@ -16,7 +16,7 @@
           <i class="fas fa-map-marker-alt pr-2"></i>
           地址：
         </span>
-        {{restaurant.location}}
+          {{#if restaurant.location}} {{restaurant.location}} {{else}} undefined {{/if}}
         <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
           <i class="fas fa-location-arrow pr-2 fa-xs"></i>
         </a>
@@ -27,7 +27,7 @@
           <i class="fas fa-mobile-alt pr-2"></i>
           電話：
         </span>
-        {{restaurant.phone}}
+        {{#if restaurant.phone}} {{restaurant.phone}} {{else}} undefined {{/if}}
       </p>
 
       <p class="mb-5">
@@ -35,7 +35,7 @@
       </p>
 
       <img class="rounded mx-auto d-block mb-4 w-100"
-        src="{{restaurant.image}}" alt="{{restaurant.name}}"
+        src="{{#if restaurant.image}} {{restaurant.image}} {{else}} https://i.imgur.com/jFMxCZd.png {{/if}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
     </div>
   </div>

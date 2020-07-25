@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const host = 3000
+let newDataError = 0
 
 //Require restaurant json file
 // const restaurants = require('./restaurant.json').results
@@ -20,6 +21,10 @@ app.listen(host, () => {
   console.log("Enable server...")
 })
 
+//Require body-parser
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // 載入mongoose與相關設定
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -33,6 +38,12 @@ app.get('/', (req, res) => {
   restaurantSeed.find().lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
+})
+
+
+app.get('/restaurants/new', (req, res) => {
+  res.render('new', { alert: newDataError })
+  newDataError = 0
 })
 
 app.get('/restaurants/:id', (req, res) => {
@@ -53,5 +64,12 @@ app.get('/search', (req, res) => {
     })
     .catch(error => console.log(error))
 
+})
+
+//POST method request---------------------------------------------------------------------------
+app.post('/restaurants', (req, res) => {
+  restaurantSeed.create(req.body)
+    .then(() => res.redirect('/'))
+    .catch(error => { newDataError = 1; return res.redirect('/restaurants/new')} )
 })
 
