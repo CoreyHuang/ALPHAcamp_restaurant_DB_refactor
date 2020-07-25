@@ -35,6 +35,7 @@ db.once('open', () => { console.log('mongodb connected!') }) //連線成功
 
 //Get method request---------------------------------------------------------------------------
 app.get('/', (req, res) => {
+  console.log("req.params.edit", req.params)
   restaurantSeed.find().lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
@@ -46,11 +47,23 @@ app.get('/restaurants/new', (req, res) => {
   newDataError = 0
 })
 
+app.get('/restaurants/edit', (req, res) => {
+  res.render('edit', { alert: newDataError })
+  newDataError = 0
+})
+
 app.get('/restaurants/:id', (req, res) => {
   restaurantSeed.findById(req.params.id).lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
+
+app.get('/restaurants/:id/edit', (req, res) => {
+  restaurantSeed.findById(req.params.id).lean()
+    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
+    .catch(error => console.log(error))
+})
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase()
@@ -70,6 +83,22 @@ app.get('/search', (req, res) => {
 app.post('/restaurants', (req, res) => {
   restaurantSeed.create(req.body)
     .then(() => res.redirect('/'))
-    .catch(error => { newDataError = 1; return res.redirect('/restaurants/new')} )
+    .catch(error => { newDataError = 1; return res.redirect('/restaurants/new') })
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  restaurantSeed.findById(req.params.id)
+    .then(restaurant => { 
+      for (let i in restaurant) {
+        if (req.body[i] && typeof req.body[i] !== "function")
+          restaurant[i] = req.body[i]
+      }
+      restaurant.save()
+    })
+    .then(() => { 
+      if (!req.body.name || !req.body.category || !req.body.description) newDataError = 1
+      else newDataError = 0
+      return res.redirect(`/restaurants/${req.params.id}/edit`) })
+    .catch(error => res.redirect(`/restaurants/${req.params.id}/edit`) )
 })
 
