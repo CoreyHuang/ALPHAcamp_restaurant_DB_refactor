@@ -3,7 +3,7 @@
 ### 此網站是由node.js與express共同打造的，並加入資料庫的CRUD操作。
 
 ---
-![image](https://github.com/CoreyHuang/ALPHAcamp_restaurant-DB-/blob/master/restaurantDB.png)
+![image](https://github.com/CoreyHuang/ALPHAcamp_restaurant_DB_refactor.git/blob/master/restaurantDB.png)
 ## Features(功能描述):
 #### 使用者可以瀏覽全部餐廳。
 #### 使用者可以搜尋喜愛的餐廳名稱與餐廳類別。
@@ -11,6 +11,7 @@
 #### 使用者可以新增喜愛的餐廳。
 #### 使用者可以修改餐廳內的相關內容。
 #### 使用者可以刪除不喜歡或過時的餐廳。
+#### 使用者可以依照個人需求排序餐廳。
 
 
 ## installation and execution(安裝與執行步驟):
@@ -37,7 +38,7 @@ npm install -g nodemon
 #### `<執行步驟>`
 #### 1. 使用terminal下載專案
 ```
-git clone https://github.com/CoreyHuang/ALPHAcamp-restaurant.git
+git clone https://github.com/CoreyHuang/ALPHAcamp_restaurant_DB_refactor.git
 ```
 #### 2. 安裝npm套件(package.json)
 ```
@@ -69,3 +70,4 @@ URL: http://localhost:3000/
 #### 2. express-handlebars : v5.1.0
 #### 3. mongoose : v5.9.25
 #### 4. body-parser : v1.19.0
+#### 5. method-override : v3.0.0
