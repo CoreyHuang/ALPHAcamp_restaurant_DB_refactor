@@ -24,6 +24,10 @@ app.listen(host, () => {
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const methodOverride = require('method-override')
+app.use(methodOverride('_method'))
+
+
 // 載入mongoose與相關設定
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -44,10 +48,10 @@ app.get('/restaurants/new', (req, res) => {
   newDataError = 0
 })
 
-app.get('/restaurants/edit', (req, res) => {
-  res.render('edit', { alert: newDataError })
-  newDataError = 0
-})
+// app.get('/restaurants/edit', (req, res) => {
+//   res.render('edit', { alert: newDataError })
+//   newDataError = 0
+// })
 
 app.get('/restaurants/:id', (req, res) => {
   restaurantSeed.findById(req.params.id).lean()
@@ -55,13 +59,9 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.get('/restaurants/:id/edit', (req, res) => {
-  restaurantSeed.findById(req.params.id).lean()
-    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
-    .catch(error => console.log(error))
-})
 
-app.get('/restaurants/:id/delete', (req, res) => {
+
+app.delete('/restaurants/:id', (req, res) => {
   restaurantSeed.findById(req.params.id)
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
@@ -88,7 +88,7 @@ app.post('/restaurants', (req, res) => {
     .catch(error => { newDataError = 1; return res.redirect('/restaurants/new') })
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   restaurantSeed.findById(req.params.id)
     .then(restaurant => { 
       for (let i in restaurant) {
@@ -104,4 +104,9 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => res.redirect(`/restaurants/${req.params.id}/edit`) )
 })
 
+app.get('/restaurants/:id/edit', (req, res) => {
+  restaurantSeed.findById(req.params.id).lean()
+    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
+    .catch(error => console.log(error))
+})
 
