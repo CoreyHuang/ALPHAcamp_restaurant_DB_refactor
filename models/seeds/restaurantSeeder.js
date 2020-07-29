@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const restaurantInfo = require('../restaurant.js')
 const restaurantSeedData = require('../../restaurant.json').results
-// console.log("restaurantSeedData", restaurantSeedData)
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
