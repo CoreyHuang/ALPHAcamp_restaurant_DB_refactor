@@ -10,6 +10,22 @@ header {
   color: #226089;
 }
 
+.inputTagNoneStyle {
+  outline: none !important;
+  border: 0!important;
+  background-color:transparent!important;
+  cursor: pointer!important;
+  width: 100%;
+}
+
+.inputTagNoneStyle:hover {
+  background-color:grey!important;
+}
+
+.sortForm {
+  max-width: 150px!important;
+}
+
 .banner {
   position: relative;
   z-index: -1;

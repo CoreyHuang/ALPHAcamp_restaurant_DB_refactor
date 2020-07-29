@@ -16,8 +16,22 @@
   </div>
 </div>
 
+<div class="dropdown row mx-0 my-0">
+  <a class="btn btn-secondary dropdown-toggle offset-9 col-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    {{#if sortKeyword}} {{sortKeyword}} {{else}} 排序 {{/if}}
+  </a>
+
+  <form action="/sort" class="dropdown-menu row justify-content-center sortForm" aria-labelledby="dropdownMenuLink">
+    <input class="inputTagNoneStyle" type="submit" name="keyword" value="A -> Z">
+    <input class="inputTagNoneStyle" type="submit" name="keyword" value="Z -> A">
+    <input class="inputTagNoneStyle" type="submit" name="keyword" value="類別">
+    <input class="inputTagNoneStyle" type="submit" name="keyword" value="地區">
+  </div>
+</div>
+
 <!-- restaurant list -->
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">

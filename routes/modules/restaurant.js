@@ -4,10 +4,21 @@ const router = express.Router()
 const restaurantSeed = require('../../models/restaurant.js')
 let newDataError
 
-
 router.get('/new', (req, res) => {
   res.render('new', { alert: newDataError })
   newDataError = 0
+})
+
+router.get('/:id', (req, res) => {
+  restaurantSeed.findById(req.params.id).lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+router.get('/:id/edit', (req, res) => {
+  restaurantSeed.findById(req.params.id).lean()
+    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
+    .catch(error => console.log(error))
 })
 
 router.post('/', (req, res) => {
@@ -32,20 +43,6 @@ router.put('/:id', (req, res) => {
     })
     .catch(error => res.redirect(`/restaurants/${req.params.id}/edit`))
 })
-
-router.get('/:id/edit', (req, res) => {
-  restaurantSeed.findById(req.params.id).lean()
-    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
-    .catch(error => console.log(error))
-})
-
-router.get('/:id', (req, res) => {
-  restaurantSeed.findById(req.params.id).lean()
-    .then(restaurant => res.render('show', { restaurant }))
-    .catch(error => console.log(error))
-})
-
-
 
 router.delete('/:id', (req, res) => {
   restaurantSeed.findById(req.params.id)
