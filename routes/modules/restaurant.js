@@ -3,6 +3,7 @@ const router = express.Router()
 
 const restaurantSeed = require('../../models/restaurant.js')
 let newDataError
+// console.log("in routes")
 
 router.get('/new', (req, res) => {
   res.render('new', { alert: newDataError })
