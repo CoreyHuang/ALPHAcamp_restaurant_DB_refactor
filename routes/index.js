@@ -6,12 +6,12 @@ const restaurant = require('./modules/restaurant.js')
 const search = require('./modules/search.js')
 const sort = require('./modules/sort.js')
 const users = require('./modules/users.js')
+const auth = require('../middleware/auth.js')
 
-
-router.use('/restaurants', restaurant)
-router.use('/search', search)
-router.use('/sort', sort)
+router.use('/restaurants', auth, restaurant)
+router.use('/search', auth, search)
+router.use('/sort', auth, sort)
 router.use('/users', users)
-router.use('/', home)
+router.use('/', auth, home)
 
 module.exports = router
