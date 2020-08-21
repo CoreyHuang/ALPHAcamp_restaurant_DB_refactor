@@ -7,13 +7,25 @@ const passport = require('passport')
 router.get('/login', (req, res) => {
   // console.log('req.user', req.user)
   // console.log('req.session', req.session)
-  res.render('login')
+  // console.log('res.locals', res.locals)
+  email = req.flash('email')
+  password = req.flash('password')
+  // console.log('req.flash', req.flash('password'))
+  res.render('login', { loginError: req.flash('loginError')[0], email, password })
 })
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login' }),
-   (req, res) => {
+router.post('/login', judgeInput, passport.authenticate('local', { failureRedirect: '/users/login' }),
+  (req, res) => {
     res.redirect('/');
   })
+function judgeInput(req, res, next) {
+  // console.log("req.body -test", req.body)
+  if (!req.body.email || !req.body.password)
+    req.flash('loginError', '帳號/密碼不能為空~')
+  req.flash('email', req.body.email)
+  req.flash('password', req.body.password)
+  next()
+}
 
 router.get('/logout', (req, res) => {
   // console.log('req.user', req.user)
@@ -25,7 +37,8 @@ router.get('/logout', (req, res) => {
 
 
 router.get('/register', (req, res) => {
-
+  // console.log('req.body', req.body)
+  // console.log(' req.flash', req.flash('Error'))
   res.render('register')
 })
 
@@ -37,15 +50,24 @@ router.post('/register', (req, res) => {
 
   if (!name || !email || !password || !confirmPassword) {
     console.log('輸出提示 所有都是必填')
+    req.flash('registerError', '所有都是必填!\n')
   }
   if (password !== confirmPassword) {
     console.log('輸出提示 密碼與確認密碼不同')
+    req.flash('registerError', '密碼與確認密碼不同!\n')
   }
 
   userSchema.findOne({ email })
     .then(user => {
-      if (user)
-      return console.log('帳號重複 回傳所有提示資料')
+      if (user) {
+        req.flash('registerError', '帳號已註冊過!\n')
+        return res.render('register', {
+          name,
+          email,
+          registerError: req.flash('registerError'),
+        })
+      }
+
 
       return bcryptjs.genSalt(10)
         .then(salt => bcryptjs.hash(password, salt))

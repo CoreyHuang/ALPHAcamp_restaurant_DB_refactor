@@ -9,6 +9,7 @@ const exphbs = require('express-handlebars')
 const session = require('express-session')
 const usePassport = require('./config/passport.js')
 const useResLocalStorage = require('./middleware/resLocalStorage.js')
+const flash = require('connect-flash');
 
 const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: "main" }))
@@ -21,6 +22,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+app.use(flash());
+
+// app.use((req, res, next) => {
+//   req.flash('info', 'Flash is back!')
+//   console.log('in middleware')
+//   next()
+// })
 
 usePassport(app)
 app.use(useResLocalStorage)
