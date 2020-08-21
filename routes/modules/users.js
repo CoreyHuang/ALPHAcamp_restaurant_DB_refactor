@@ -5,12 +5,7 @@ const bcryptjs = require('bcryptjs')
 const passport = require('passport')
 
 router.get('/login', (req, res) => {
-  // console.log('req.user', req.user)
-  // console.log('req.session', req.session)
-  // console.log('res.locals', res.locals)
   email = req.flash('email')
-  // password = req.flash('password')
-  // console.log('req.flash', req.flash('password'))
   res.render('login', { loginError: req.flash('loginError')[0], email })
 })
 
@@ -19,7 +14,6 @@ router.post('/login', judgeInput, passport.authenticate('local', { failureRedire
     res.redirect('/');
   })
 function judgeInput(req, res, next) {
-  // console.log("req.body -test", req.body)
   if (!req.body.email || !req.body.password)
     req.flash('loginError', '帳號/密碼不能為空~')
   req.flash('email', req.body.email)
@@ -28,32 +22,22 @@ function judgeInput(req, res, next) {
 }
 
 router.get('/logout', (req, res) => {
-  // console.log('req.user', req.user)
-  // console.log('req.session', req.session)
   req.logout()
-  // console.log('req.session', req.session)
   res.redirect('/user/login')
 })
 
 
 router.get('/register', (req, res) => {
-  // console.log('req.body', req.body)
-  // console.log(' req.flash', req.flash('Error'))
   res.render('register')
 })
 
 router.post('/register', (req, res) => {
-
-  // console.log('req.body', req.body)
   const { name, email, password, confirmPassword } = req.body
-  // console.log('password', password)
 
   if (!name || !email || !password || !confirmPassword) {
-    console.log('輸出提示 所有都是必填')
     req.flash('registerError', '所有都是必填!\n')
   }
   if (password !== confirmPassword) {
-    console.log('輸出提示 密碼與確認密碼不同')
     req.flash('registerError', '密碼與確認密碼不同!\n')
   }
 
@@ -67,7 +51,6 @@ router.post('/register', (req, res) => {
           registerError: req.flash('registerError'),
         })
       }
-
 
       return bcryptjs.genSalt(10)
         .then(salt => bcryptjs.hash(password, salt))

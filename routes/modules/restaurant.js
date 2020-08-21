@@ -2,15 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 const restaurantSeed = require('../../models/restaurant.js')
-// let newDataError
-// console.log("in routes")
 
 router.get('/new', (req, res) => {
-  // console.log('finalData', req.body)
   restaurant = req.flash('finalData')[0]
-  console.log('restaurant', restaurant)
   res.render('new', { alert: req.flash('newDateStatus'), restaurant })
-  // newDataError = 0
 })
 
 router.get('/:id', (req, res) => {
@@ -31,14 +26,11 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/', (req, res) => {
   req.body.userId = req.user._id
-  // console.log('req.body', req.body)
   restaurantSeed.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => {
-      // newDataError = 1
       req.flash('newDateStatus', "請確認是否仍有參數未填寫~")
       req.flash('finalData', req.body)
-      // console.log("error", error)
       return res.redirect('/restaurants/new')
     })
 })
@@ -57,8 +49,6 @@ router.put('/:id', (req, res) => {
     .then(() => {
       if (!req.body.name || !req.body.category || !req.body.description)
         req.flash('newDateStatus', "請確認是否仍有參數未填寫~")
-      // newDataError = 1
-      // else newDataError = 0
       return res.redirect(`/restaurants/${req.params.id}/edit`)
     })
     .catch(error => res.redirect(`/restaurants/${req.params.id}/edit`))

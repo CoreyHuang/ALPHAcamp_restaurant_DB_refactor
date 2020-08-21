@@ -26,12 +26,6 @@ app.use(session({
 }))
 app.use(flash());
 
-// app.use((req, res, next) => {
-//   req.flash('info', 'Flash is back!')
-//   console.log('in middleware')
-//   next()
-// })
-
 usePassport(app)
 app.use(useResLocalStorage)
 
