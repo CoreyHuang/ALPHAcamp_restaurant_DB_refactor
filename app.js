@@ -7,7 +7,8 @@ const db = require('./config/moogoose.js')
 const router = require('./routes/index.js')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
-const passport = require('./config/passport.js')
+const usePassport = require('./config/passport.js')
+const useResLocalStorage = require('./middleware/resLocalStorage.js')
 
 const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: "main" }))
@@ -21,8 +22,8 @@ app.use(session({
   saveUninitialized: true,
 }))
 
-passport(app)
-
+usePassport(app)
+app.use(useResLocalStorage)
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
