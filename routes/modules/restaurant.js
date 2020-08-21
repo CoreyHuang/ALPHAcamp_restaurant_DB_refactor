@@ -11,25 +11,33 @@ router.get('/new', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  restaurantSeed.findById(req.params.id).lean()
+  const userId = req.user._id 
+  const _id = req.params.id
+  restaurantSeed.findOne({ userId , _id }).lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
 
 router.get('/:id/edit', (req, res) => {
-  restaurantSeed.findById(req.params.id).lean()
+  const userId = req.user._id
+  const _id = req.params.id
+  restaurantSeed.findOne({ userId, _id }).lean()
     .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
     .catch(error => console.log(error))
 })
 
 router.post('/', (req, res) => {
+  req.body.userId = req.user._id
+  console.log('req.body', req.body)
   restaurantSeed.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => { newDataError = 1; return res.redirect('/restaurants/new') })
 })
 
 router.put('/:id', (req, res) => {
-  restaurantSeed.findById(req.params.id)
+  const userId = req.user._id
+  const _id = req.params.id
+  restaurantSeed.findOne({ userId, _id })
     .then(restaurant => {
       for (let i in restaurant) {
         if (req.body[i] && typeof req.body[i] !== "function")
@@ -46,7 +54,9 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  restaurantSeed.findById(req.params.id)
+  const userId = req.user._id
+  const _id = req.params.id
+  restaurantSeed.findOne({ userId, _id })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

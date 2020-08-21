@@ -5,8 +5,8 @@ const bcryptjs = require('bcryptjs')
 const passport = require('passport')
 
 router.get('/login', (req, res) => {
-  console.log('req.user', req.user)
-  console.log('req.session', req.session)
+  // console.log('req.user', req.user)
+  // console.log('req.session', req.session)
   res.render('login')
 })
 
@@ -19,7 +19,7 @@ router.get('/logout', (req, res) => {
   // console.log('req.user', req.user)
   // console.log('req.session', req.session)
   req.logout()
-  console.log('req.session', req.session)
+  // console.log('req.session', req.session)
   res.redirect('/user/login')
 })
 
