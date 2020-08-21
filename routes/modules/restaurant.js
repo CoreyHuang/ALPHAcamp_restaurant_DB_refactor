@@ -2,18 +2,21 @@ const express = require('express')
 const router = express.Router()
 
 const restaurantSeed = require('../../models/restaurant.js')
-let newDataError
+// let newDataError
 // console.log("in routes")
 
 router.get('/new', (req, res) => {
-  res.render('new', { alert: newDataError })
-  newDataError = 0
+  // console.log('finalData', req.body)
+  restaurant = req.flash('finalData')[0]
+  console.log('restaurant', restaurant)
+  res.render('new', { alert: req.flash('newDateStatus'), restaurant })
+  // newDataError = 0
 })
 
 router.get('/:id', (req, res) => {
-  const userId = req.user._id 
+  const userId = req.user._id
   const _id = req.params.id
-  restaurantSeed.findOne({ userId , _id }).lean()
+  restaurantSeed.findOne({ userId, _id }).lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
@@ -22,16 +25,22 @@ router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   restaurantSeed.findOne({ userId, _id }).lean()
-    .then(restaurant => res.render('edit', { restaurant, alert: newDataError }))
+    .then(restaurant => res.render('edit', { restaurant, alert: req.flash('newDateStatus') }))
     .catch(error => console.log(error))
 })
 
 router.post('/', (req, res) => {
   req.body.userId = req.user._id
-  console.log('req.body', req.body)
+  // console.log('req.body', req.body)
   restaurantSeed.create(req.body)
     .then(() => res.redirect('/'))
-    .catch(error => { newDataError = 1; return res.redirect('/restaurants/new') })
+    .catch(error => {
+      // newDataError = 1
+      req.flash('newDateStatus', "請確認是否仍有參數未填寫~")
+      req.flash('finalData', req.body)
+      // console.log("error", error)
+      return res.redirect('/restaurants/new')
+    })
 })
 
 router.put('/:id', (req, res) => {
@@ -46,8 +55,10 @@ router.put('/:id', (req, res) => {
       restaurant.save()
     })
     .then(() => {
-      if (!req.body.name || !req.body.category || !req.body.description) newDataError = 1
-      else newDataError = 0
+      if (!req.body.name || !req.body.category || !req.body.description)
+        req.flash('newDateStatus', "請確認是否仍有參數未填寫~")
+      // newDataError = 1
+      // else newDataError = 0
       return res.redirect(`/restaurants/${req.params.id}/edit`)
     })
     .catch(error => res.redirect(`/restaurants/${req.params.id}/edit`))
