@@ -1,4 +1,6 @@
-//Server default setting
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const express = require('express')
 const restaurantSeed = require('./models/restaurant.js')
 const bodyParser = require('body-parser')
@@ -15,10 +17,10 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: "main" }))
 app.set('view engine', 'handlebars')
 
-const host = 3000
+const port = process.env.port
 
 app.use(session({
-  secret: 'test123',
+  secret: process.env.secret,
   resave: false,
   saveUninitialized: true,
 }))
@@ -39,4 +41,4 @@ app.use(methodOverride('_method'))
 app.use(router)
 
 //Listen server
-app.listen(host, () => { console.log("Enable server...") })
+app.listen(port, () => { console.log("Enable server...") })

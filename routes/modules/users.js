@@ -9,9 +9,9 @@ router.get('/login', (req, res) => {
   // console.log('req.session', req.session)
   // console.log('res.locals', res.locals)
   email = req.flash('email')
-  password = req.flash('password')
+  // password = req.flash('password')
   // console.log('req.flash', req.flash('password'))
-  res.render('login', { loginError: req.flash('loginError')[0], email, password })
+  res.render('login', { loginError: req.flash('loginError')[0], email })
 })
 
 router.post('/login', judgeInput, passport.authenticate('local', { failureRedirect: '/users/login' }),

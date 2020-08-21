@@ -7,11 +7,13 @@ const search = require('./modules/search.js')
 const sort = require('./modules/sort.js')
 const users = require('./modules/users.js')
 const auth = require('../middleware/auth.js')
+const authFacebook = require('./modules/authFacebook.js')
 
 router.use('/restaurants', auth, restaurant)
 router.use('/search', auth, search)
 router.use('/sort', auth, sort)
 router.use('/users', users)
+router.use('/auth', authFacebook)
 router.use('/', auth, home)
 
 module.exports = router
