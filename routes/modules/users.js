@@ -17,7 +17,6 @@ function judgeInput(req, res, next) {
   if (!req.body.email || !req.body.password)
     req.flash('loginError', '帳號/密碼不能為空~')
   req.flash('email', req.body.email)
-  req.flash('password', req.body.password)
   next()
 }
 
@@ -25,7 +24,6 @@ router.get('/logout', (req, res) => {
   req.logout()
   res.redirect('/user/login')
 })
-
 
 router.get('/register', (req, res) => {
   res.render('register')
@@ -36,9 +34,11 @@ router.post('/register', (req, res) => {
 
   if (!name || !email || !password || !confirmPassword) {
     req.flash('registerError', '所有都是必填!\n')
+    return res.render('register', { registerError: req.flash('registerError'), name, email})
   }
   if (password !== confirmPassword) {
     req.flash('registerError', '密碼與確認密碼不同!\n')
+    return res.render('register', { registerError: req.flash('registerError'), name, email })
   }
 
   userSchema.findOne({ email })

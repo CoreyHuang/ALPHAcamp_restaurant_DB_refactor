@@ -1,20 +1,11 @@
 # 美食網站 
-### 一個提供各式類別的美食網站，可以供大家搜尋與查閱相關資訊，也可以對個別做新增/刪除/修改的動作。
-### 此網站是由node.js與express共同打造的，並加入資料庫的CRUD操作。
+### 此網站是由node.js與express所打造的，並加入資料庫的CRUD操作，與登入系統的帳號管理。
+### 能提供每個人獨立的操作環境，收藏喜愛的美食網站，並提供帳密的保護。
 
 ---
 ![image](https://github.com/CoreyHuang/ALPHAcamp_restaurant_DB_refactor/blob/master/restaurantDB.png)
-## Features(功能描述):
-#### 使用者可以瀏覽全部餐廳。
-#### 使用者可以搜尋喜愛的餐廳名稱與餐廳類別。
-#### 使用者可以點擊餐廳並瀏覽其詳細資訊。
-#### 使用者可以新增喜愛的餐廳。
-#### 使用者可以修改餐廳內的相關內容。
-#### 使用者可以刪除不喜歡或過時的餐廳。
-#### 使用者可以依照個人需求排序餐廳。
 
-
-## installation and execution(安裝與執行步驟):
+### installation and execution(安裝與執行步驟):
 #### `<安裝步驟>`
 #### 1. 安裝git
 ```
@@ -56,18 +47,30 @@ nodemon app.js or npm run dev
 ```
 URL: http://localhost:3000/
 ```
+|Account|Password|
+|:-----:|:------:|
+|user1@example.com|12345678|
+|-------|--------|
+|user2@example.com|12345678|
+|-------|--------|
 
-
-## Prerequisites(環境建置與需求):
-#### `<安裝需求>` : 版本為記錄用，並非必須
-#### 1. git : v2.27.0.windows.1
-#### 2. nvm : v1.1.7
-#### 3. node : v10.15.0
-#### 4. npm : v6.4.1
-#### 5. nodemon : v2.0.4
+### Prerequisites(環境建置與需求):
+#### `<安裝需求>` 
+ 1. git : v2.27.0.windows.1
+ 2. nvm : v1.1.7
+ 3. node : v10.15.0
+ 4. npm : v6.4.1
+ 5. nodemon : v2.0.4
 #### `<npm套件>`
-#### 1. express : v4.17.1
-#### 2. express-handlebars : v5.1.0
-#### 3. mongoose : v5.9.25
-#### 4. body-parser : v1.19.0
-#### 5. method-override : v3.0.0
+ 1. express : v4.17.1
+ 2. express-handlebars : v5.1.0
+ 3. mongoose : v5.9.25
+ 4. body-parser : v1.19.0
+ 5. method-override : v3.0.0
+ 6. bcryptjs : v2.4.3
+ 7. connect-flash : v0.1.1
+ 8. dotenv : v8.2.0
+ 9. express-session : v1.17.1
+ 10. passport : v0.4.1
+ 11. passport-facebook : v3.0.0
+ 12. passport-local : v1.0.0
