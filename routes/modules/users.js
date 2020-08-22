@@ -5,8 +5,7 @@ const bcryptjs = require('bcryptjs')
 const passport = require('passport')
 
 router.get('/login', (req, res) => {
-  email = req.flash('email')
-  res.render('login', { loginError: req.flash('loginError')[0], email })
+  res.render('login', { email: req.flash('email') })
 })
 
 router.post('/login', judgeInput, passport.authenticate('local', { failureRedirect: '/users/login' }),
@@ -33,22 +32,18 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
 
   if (!name || !email || !password || !confirmPassword) {
-    req.flash('registerError', '所有都是必填!\n')
-    return res.render('register', { registerError: req.flash('registerError'), name, email})
+    return res.render('register', { registerError: '所有都是必填!', name, email })
   }
   if (password !== confirmPassword) {
-    req.flash('registerError', '密碼與確認密碼不同!\n')
-    return res.render('register', { registerError: req.flash('registerError'), name, email })
+    return res.render('register', { registerError: '密碼與確認密碼不同!', name, email })
   }
 
   userSchema.findOne({ email })
     .then(user => {
       if (user) {
-        req.flash('registerError', '帳號已註冊過!\n')
         return res.render('register', {
-          name,
-          email,
-          registerError: req.flash('registerError'),
+          name, email,
+          registerError: '帳號已註冊過!'
         })
       }
 
@@ -65,11 +60,6 @@ router.post('/register', (req, res) => {
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
-
-
 })
-
-
-
 
 module.exports = router
