@@ -1,6 +1,5 @@
 # 美食網站 
-### 此網站是由node.js與express所打造的，並加入資料庫的CRUD操作，與登入系統的帳號管理。
-### 能提供每個人獨立的操作環境，收藏喜愛的美食網站，並提供帳密的保護。
+### 此網站是由node.js與express所打造的，並加入資料庫的CRUD操作，與登入系統的帳號管理。提供每個人獨立的操作環境，收藏喜愛的美食網站，並提供帳密的保護。
 
 ---
 ![image](https://github.com/CoreyHuang/ALPHAcamp_restaurant_DB_refactor/blob/master/restaurantDB.png)
@@ -50,9 +49,7 @@ URL: http://localhost:3000/
 |Account|Password|
 |:-----:|:------:|
 |user1@example.com|12345678|
-|-------|--------|
 |user2@example.com|12345678|
-|-------|--------|
 
 ### Prerequisites(環境建置與需求):
 #### `<安裝需求>` 
