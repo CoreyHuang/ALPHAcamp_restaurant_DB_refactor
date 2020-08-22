@@ -55,10 +55,9 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  console.log('check')
   const userId = req.user._id
   const _id = req.params.id
-  restaurantSeed.findOne({ userId, _id })
+  return restaurantSeed.findOne({ userId, _id })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
