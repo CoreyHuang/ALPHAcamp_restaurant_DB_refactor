@@ -60,18 +60,8 @@ function createUser(user) {
 
 function createUserData(user, jsonData) {
   return new Promise(function (resolve, reject) {
-    return restaurantSchema.create({
-      name: jsonData.name,
-      name_en: jsonData.name_en,
-      category: jsonData.category,
-      image: jsonData.image,
-      location: jsonData.location,
-      phone: jsonData.phone,
-      google_map: jsonData.google_map,
-      rating: jsonData.rating,
-      description: jsonData.description,
-      userId: user._id,
-    })
+    jsonData.userId = user._id
+    return restaurantSchema.create(jsonData)
       .then(() => resolve())
       .catch(err => reject(err))
   })

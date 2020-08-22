@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 // 載入mongoose與相關設定
 const mongoose = require('mongoose')
 mongoose.connect(process.env.mongodb, { useNewUrlParser: true, useUnifiedTopology: true, 
