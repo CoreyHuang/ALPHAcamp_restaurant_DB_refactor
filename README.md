@@ -36,16 +36,18 @@ npm install
 ```
 #### 3. 創造DB資料(專案資料夾中)
 ```
-nodemon npm run seed
+npm run seed
 ```
 #### 4. 開啟本地伺服(專案資料夾中)
 ```
-nodemon app.js or npm run dev
+npm run dev
 ```
 #### 5. 執行
 ```
 URL: http://localhost:3000/
 ```
+
+### Test Account
 |Account|Password|
 |:-----:|:------:|
 |user1@example.com|12345678|
